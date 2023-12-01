@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.mockito.Mockito.mock;
@@ -22,11 +24,20 @@ public class CalibrationTest {
     }
 
     @Test
-    void shouldProduceCalibrationSum() {
+    void shouldProduceOptional() {
         final var calibrationDocument = mock(CalibrationDocument.class);
 
         final var  product = sus.apply(calibrationDocument);
 
-        assertThat(product).isInstanceOf(CalibrationSum.class);
+        assertThat(product).isInstanceOf(Optional.class);
+    }
+
+    @Test
+    void shouldProduceOptionalOfCalibrationSum() {
+        final var calibrationDocument = mock(CalibrationDocument.class);
+
+        final var  product = sus.apply(calibrationDocument);
+
+        assertThat(product).containsInstanceOf(CalibrationSum.class);
     }
 }

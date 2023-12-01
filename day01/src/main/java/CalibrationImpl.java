@@ -1,7 +1,9 @@
+import java.util.Optional;
+
 public class CalibrationImpl implements Calibration {
     @Override
-    public CalibrationSum apply(CalibrationDocument calibrationDocument) {
+    public Optional<CalibrationSum> apply(CalibrationDocument calibrationDocument) {
 
-        return new CalibrationSum();
+        return Optional.of(new  CalibrationSum());
     }
 }

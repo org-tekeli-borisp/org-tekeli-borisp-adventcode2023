@@ -1,3 +1,5 @@
+import java.util.Optional;
+
 public interface Calibration {
-    CalibrationSum apply(final CalibrationDocument calibrationDocument);
+    Optional<CalibrationSum> apply(final CalibrationDocument calibrationDocument);
 }
