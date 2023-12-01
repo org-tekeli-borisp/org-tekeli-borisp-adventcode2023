@@ -61,7 +61,7 @@ public class CalibrationTest {
 
     @Test
     void shouldProduceOptionalEmptyInCaseCalibrationDocumentIsNotValid() {
-        final var calibrationDocument = givenCalibrationDocument();
+        final var calibrationDocument = givenInvalidCalibrationDocument();
 
         final var product = sus.apply(calibrationDocument);
 
@@ -71,5 +71,9 @@ public class CalibrationTest {
 
     private static CalibrationDocument givenCalibrationDocument() {
         return new CalibrationDocument("");
+    }
+
+    private static CalibrationDocument givenInvalidCalibrationDocument() {
+        return new CalibrationDocument(null);
     }
 }

@@ -31,4 +31,30 @@ class IsCalibrationDocumentValidTest {
 
         assertThat(product).isInstanceOf(Boolean.class);
     }
+
+    @Test
+    void shouldProduceFalseIncaseCalibrationDocumentIsNull() {
+
+        final boolean product = sus.test(null);
+
+        assertThat(product).isFalse();
+    }
+
+    @Test
+    void shouldProduceFalseIncaseCalibrationDocumentHasNullContent() {
+        final var calibrationDocument =  new CalibrationDocument(null);
+
+        final boolean product = sus.test(calibrationDocument);
+
+        assertThat(product).isFalse();
+    }
+
+    @Test
+    void shouldProduceTrueOtherwise() {
+        final var calibrationDocument =  new CalibrationDocument("Some content");
+
+        final boolean product = sus.test(calibrationDocument);
+
+        assertThat(product).isTrue();
+    }
 }
