@@ -2,13 +2,11 @@ package org.tekeli.borisp.adventcode2023.day01;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.mockito.Mockito.mock;
 
 public class CalibrationTest {
 
@@ -16,30 +14,30 @@ public class CalibrationTest {
 
     @BeforeEach
     void setUp() {
-        sus = new CalibrationImpl();
+        sus = new CalibrationImpl(new IsCalibrationDocumentValidImpl());
     }
 
     @Test
     void shouldConsumeCalibrationDocument() {
-        final var calibrationDocument = Mockito.mock(CalibrationDocument.class);
+        final var calibrationDocument = givenCalibrationDocument();
 
         assertThatNoException().isThrownBy(() -> sus.apply(calibrationDocument));
     }
 
     @Test
     void shouldProduceOptional() {
-        final var calibrationDocument = Mockito.mock(CalibrationDocument.class);
+        final var calibrationDocument = givenCalibrationDocument();
 
-        final var  product = sus.apply(calibrationDocument);
+        final var product = sus.apply(calibrationDocument);
 
         assertThat(product).isInstanceOf(Optional.class);
     }
 
     @Test
     void shouldProduceOptionalOfCalibrationSum() {
-        final var calibrationDocument = Mockito.mock(CalibrationDocument.class);
+        final var calibrationDocument = givenCalibrationDocument();
 
-        final var  product = sus.apply(calibrationDocument);
+        final var product = sus.apply(calibrationDocument);
 
         assertThat(product).containsInstanceOf(CalibrationSum.class);
     }
@@ -47,17 +45,31 @@ public class CalibrationTest {
     @Test
     void shouldProduceOptionalEmptyInCaseCalibrationDocumentIsNull() {
 
-        final var  product = sus.apply(null);
+        final var product = sus.apply(null);
 
         assertThat(product).isEmpty();
     }
 
     @Test
     void shouldProduceOptionalPresentInCaseCalibrationDocumentIsNotNull() {
-        final var calibrationDocument = Mockito.mock(CalibrationDocument.class);
+        final var calibrationDocument = givenCalibrationDocument();
 
-        final var  product = sus.apply(calibrationDocument);
+        final var product = sus.apply(calibrationDocument);
 
         assertThat(product).isPresent();
+    }
+
+    @Test
+    void shouldProduceOptionalEmptyInCaseCalibrationDocumentIsNotValid() {
+        final var calibrationDocument = givenCalibrationDocument();
+
+        final var product = sus.apply(calibrationDocument);
+
+        assertThat(product).isEmpty();
+
+    }
+
+    private static CalibrationDocument givenCalibrationDocument() {
+        return new CalibrationDocument("");
     }
 }
