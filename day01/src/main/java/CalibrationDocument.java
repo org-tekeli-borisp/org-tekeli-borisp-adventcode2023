@@ -1,2 +1,1 @@
-public class CalibrationDocument {
-}
+public record CalibrationDocument(String content) {}
