@@ -69,11 +69,11 @@ public class CalibrationTest {
 
     }
 
-    private static CalibrationDocument givenCalibrationDocument() {
+    private CalibrationDocument givenCalibrationDocument() {
         return new CalibrationDocument("");
     }
 
-    private static CalibrationDocument givenInvalidCalibrationDocument() {
+    private CalibrationDocument givenInvalidCalibrationDocument() {
         return new CalibrationDocument(null);
     }
 }

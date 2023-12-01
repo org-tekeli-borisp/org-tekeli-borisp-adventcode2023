@@ -4,7 +4,7 @@ import java.util.Optional;
 
 class IsCalibrationDocumentValidImpl implements IsCalibrationDocumentValid {
     @Override
-    public boolean test(CalibrationDocument calibrationDocument) {
+    public boolean test(final CalibrationDocument calibrationDocument) {
         return Optional
                 .ofNullable(calibrationDocument)
                 .map(CalibrationDocument::content)

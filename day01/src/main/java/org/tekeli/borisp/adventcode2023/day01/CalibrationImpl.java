@@ -6,7 +6,7 @@ class CalibrationImpl implements Calibration {
 
     private final IsCalibrationDocumentValid isCalibrationDocumentValid;
 
-    CalibrationImpl(IsCalibrationDocumentValid isCalibrationDocumentValid) {
+    CalibrationImpl(final IsCalibrationDocumentValid isCalibrationDocumentValid) {
         this.isCalibrationDocumentValid = isCalibrationDocumentValid;
     }
 
