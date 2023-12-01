@@ -1,3 +1,5 @@
+package org.tekeli.borisp.adventcode2023.day01;
+
 import java.util.Optional;
 
 class CalibrationImpl implements Calibration {

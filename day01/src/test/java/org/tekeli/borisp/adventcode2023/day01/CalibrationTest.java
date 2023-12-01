@@ -1,5 +1,8 @@
+package org.tekeli.borisp.adventcode2023.day01;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.Optional;
 
@@ -18,14 +21,14 @@ public class CalibrationTest {
 
     @Test
     void shouldConsumeCalibrationDocument() {
-        final var calibrationDocument = mock(CalibrationDocument.class);
+        final var calibrationDocument = Mockito.mock(CalibrationDocument.class);
 
         assertThatNoException().isThrownBy(() -> sus.apply(calibrationDocument));
     }
 
     @Test
     void shouldProduceOptional() {
-        final var calibrationDocument = mock(CalibrationDocument.class);
+        final var calibrationDocument = Mockito.mock(CalibrationDocument.class);
 
         final var  product = sus.apply(calibrationDocument);
 
@@ -34,7 +37,7 @@ public class CalibrationTest {
 
     @Test
     void shouldProduceOptionalOfCalibrationSum() {
-        final var calibrationDocument = mock(CalibrationDocument.class);
+        final var calibrationDocument = Mockito.mock(CalibrationDocument.class);
 
         final var  product = sus.apply(calibrationDocument);
 
@@ -51,7 +54,7 @@ public class CalibrationTest {
 
     @Test
     void shouldProduceOptionalPresentInCaseCalibrationDocumentIsNotNull() {
-        final var calibrationDocument = mock(CalibrationDocument.class);
+        final var calibrationDocument = Mockito.mock(CalibrationDocument.class);
 
         final var  product = sus.apply(calibrationDocument);
 
