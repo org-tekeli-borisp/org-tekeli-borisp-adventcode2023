@@ -5,9 +5,12 @@ import java.util.Optional;
 class CalibrationImpl implements Calibration {
 
     private final IsCalibrationDocumentValid isCalibrationDocumentValid;
+    private final CalibrationDocumentLineToCalibrationValue calibrationDocumentLineToCalibrationValue;
 
-    CalibrationImpl(final IsCalibrationDocumentValid isCalibrationDocumentValid) {
+    CalibrationImpl(final IsCalibrationDocumentValid isCalibrationDocumentValid,
+                    final CalibrationDocumentLineToCalibrationValue calibrationDocumentLineToCalibrationValue) {
         this.isCalibrationDocumentValid = isCalibrationDocumentValid;
+        this.calibrationDocumentLineToCalibrationValue = calibrationDocumentLineToCalibrationValue;
     }
 
     @Override
@@ -15,10 +18,18 @@ class CalibrationImpl implements Calibration {
         return Optional
                 .ofNullable(calibrationDocument)
                 .filter(isCalibrationDocumentValid::test)
-                .map(this::map);
+                .map(this::calculateSum)
+                .map(CalibrationSum::new);
     }
 
-    private CalibrationSum map(final CalibrationDocument calibrationDocument) {
-        return new CalibrationSum(12L);
+    private Integer calculateSum(final CalibrationDocument calibrationDocument) {
+        return Optional
+                .of(calibrationDocument)
+                .map(CalibrationDocument::content)
+                .stream()
+                .flatMap(String::lines)
+                .map(calibrationDocumentLineToCalibrationValue::apply)
+                .map(CalibrationValue::getValue)
+                .reduce(0, Integer::sum);
     }
 }

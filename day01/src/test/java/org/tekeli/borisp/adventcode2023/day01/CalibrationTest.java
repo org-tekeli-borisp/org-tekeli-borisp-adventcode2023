@@ -10,11 +10,17 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 
 public class CalibrationTest {
 
+    private static final String exampleData = """
+            1abc2
+            pqr3stu8vwx
+            a1b2c3d4e5f
+            treb7uchet
+            """;
     private Calibration sus;
 
     @BeforeEach
     void setUp() {
-        sus = new CalibrationImpl(new IsCalibrationDocumentValidImpl());
+        sus = new CalibrationImpl(new IsCalibrationDocumentValidImpl(), new CalibrationDocumentLineToCalibrationValueImpl());
     }
 
     @Test
@@ -68,22 +74,54 @@ public class CalibrationTest {
         assertThat(product).isEmpty();
     }
 
+
     @Test
-    void shouldProduce12InCaseContentIs1abc2() {
-        final var calibrationDocument = givenCalibrationDocument();
+    void shouldProduce0InCaseNoNumbers() {
+        final var calibrationDocument = givenCalibrationDocumentWithContent("""
+                no numbers at all
+                no numbers at all
+                no numbers at all
+                """);
 
         final var product = sus.apply(calibrationDocument);
 
         assertThat(product).isPresent();
         final var calibrationSum = product.get();
-        assertThat(calibrationSum.value()).isEqualTo(12L);
+        assertThat(calibrationSum.value()).isEqualTo(0);
+    }
+    @Test
+    void shouldProduce12() {
+        final var calibrationDocument = givenCalibrationDocumentWithContent("""
+                1abc2
+                """);
+
+        final var product = sus.apply(calibrationDocument);
+
+        assertThat(product).isPresent();
+        final var calibrationSum = product.get();
+        assertThat(calibrationSum.value()).isEqualTo(12);
+    }
+
+    @Test
+    void shouldProduce142InCaseOfExampleData() {
+        final var calibrationDocument = givenCalibrationDocumentWithContent(exampleData);
+
+        final var product = sus.apply(calibrationDocument);
+
+        assertThat(product).isPresent();
+        final var calibrationSum = product.get();
+        assertThat(calibrationSum.value()).isEqualTo(142);
     }
 
     private CalibrationDocument givenCalibrationDocument() {
-        return new CalibrationDocument("1abc2");
+        return givenCalibrationDocumentWithContent(exampleData);
     }
 
     private CalibrationDocument givenInvalidCalibrationDocument() {
-        return new CalibrationDocument(null);
+        return givenCalibrationDocumentWithContent(null);
+    }
+
+    private CalibrationDocument givenCalibrationDocumentWithContent(final String content) {
+        return new CalibrationDocument(content);
     }
 }
