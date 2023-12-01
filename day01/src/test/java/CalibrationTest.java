@@ -40,4 +40,21 @@ public class CalibrationTest {
 
         assertThat(product).containsInstanceOf(CalibrationSum.class);
     }
+
+    @Test
+    void shouldProduceOptionalEmptyInCaseCalibrationDocumentIsNull() {
+
+        final var  product = sus.apply(null);
+
+        assertThat(product).isEmpty();
+    }
+
+    @Test
+    void shouldProduceOptionalPresentInCaseCalibrationDocumentIsNotNull() {
+        final var calibrationDocument = mock(CalibrationDocument.class);
+
+        final var  product = sus.apply(calibrationDocument);
+
+        assertThat(product).isPresent();
+    }
 }
