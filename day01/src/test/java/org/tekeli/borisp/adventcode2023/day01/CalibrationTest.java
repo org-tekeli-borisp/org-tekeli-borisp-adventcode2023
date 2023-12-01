@@ -3,7 +3,13 @@ package org.tekeli.borisp.adventcode2023.day01;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
@@ -89,6 +95,7 @@ public class CalibrationTest {
         final var calibrationSum = product.get();
         assertThat(calibrationSum.value()).isEqualTo(0);
     }
+
     @Test
     void shouldProduce12() {
         final var calibrationDocument = givenCalibrationDocumentWithContent("""
@@ -111,6 +118,21 @@ public class CalibrationTest {
         assertThat(product).isPresent();
         final var calibrationSum = product.get();
         assertThat(calibrationSum.value()).isEqualTo(142);
+    }
+
+    @Test
+    void shouldProduce53921WithInputData() throws URISyntaxException, IOException {
+        final var path = Paths
+                .get(Objects.requireNonNull(getClass().getClassLoader().getResource("input.txt"))
+                        .toURI());
+        final var content = Files.readAllLines(path).stream().collect(Collectors.joining(System.getProperty("line.separator")));
+        final var calibrationDocument = givenCalibrationDocumentWithContent(content);
+
+        final var product = sus.apply(calibrationDocument);
+
+        assertThat(product).isPresent();
+        final var calibrationSum = product.get();
+        assertThat(calibrationSum.value()).isEqualTo(53921);
     }
 
     private CalibrationDocument givenCalibrationDocument() {
