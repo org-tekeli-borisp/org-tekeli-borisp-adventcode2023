@@ -35,15 +35,15 @@ public class NumberInWordsToNumberAndWordTest {
 
     @ParameterizedTest
     @CsvSource({
-            "one, 1one",
-            "two, 2two",
-            "three, 3three",
+            "one, on1e",
+            "two, tw2o",
+            "three, th3ree",
             "four, 4four",
             "five, 5five",
             "six, 6six",
             "seven, 7seven",
             "eight, 8eight",
-            "nine, 9nine"
+            "nine, n9ine"
     })
     void shouldReplaceWordWithNumberAndWord(final String input, final String expected) {
         final var givenNumberInWords = givenNumberInWords(input);
