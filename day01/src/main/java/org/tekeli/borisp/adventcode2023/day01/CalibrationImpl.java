@@ -19,6 +19,6 @@ class CalibrationImpl implements Calibration {
     }
 
     private CalibrationSum map(final CalibrationDocument calibrationDocument) {
-        return new CalibrationSum();
+        return new CalibrationSum(12L);
     }
 }

@@ -66,11 +66,21 @@ public class CalibrationTest {
         final var product = sus.apply(calibrationDocument);
 
         assertThat(product).isEmpty();
+    }
 
+    @Test
+    void shouldProduce12InCaseContentIs1abc2() {
+        final var calibrationDocument = givenCalibrationDocument();
+
+        final var product = sus.apply(calibrationDocument);
+
+        assertThat(product).isPresent();
+        final var calibrationSum = product.get();
+        assertThat(calibrationSum.value()).isEqualTo(12L);
     }
 
     private CalibrationDocument givenCalibrationDocument() {
-        return new CalibrationDocument("");
+        return new CalibrationDocument("1abc2");
     }
 
     private CalibrationDocument givenInvalidCalibrationDocument() {
