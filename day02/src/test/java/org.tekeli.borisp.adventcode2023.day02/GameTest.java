@@ -36,4 +36,15 @@ class GameTest {
 
         assertThat(sus.subsets()).contains(cubeSubset, cubeSubset2, cubeSubset3);
     }
+
+    @Test
+    void shouldHavePowerOfMinimumSet() {
+        final var cubeSubset = new CubeSubset(4, 0, 2);
+        final var cubeSubset2 = new CubeSubset(1, 2, 6);
+        final var cubeSubset3 = new CubeSubset(0, 2, 0);
+
+        final var sus = new Game(42 ,List.of(cubeSubset, cubeSubset2, cubeSubset3));
+
+        assertThat(sus.powerOfMinimumSet()).isEqualTo(48);
+    }
 }
