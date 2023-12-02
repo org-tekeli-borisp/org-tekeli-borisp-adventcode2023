@@ -14,7 +14,7 @@ public class LineToGameTest {
 
     @BeforeEach
     void setUp() {
-        sus = new LineToGameImpl(new LineToGameIdImpl());
+        sus = new LineToGameImpl(new LineToGameIdImpl(), new LineToCubeSetsImpl(new LineToCubeSetImpl()));
     }
 
     @Test

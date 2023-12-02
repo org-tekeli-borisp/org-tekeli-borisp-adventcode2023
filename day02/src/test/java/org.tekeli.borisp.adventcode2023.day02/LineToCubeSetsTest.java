@@ -12,7 +12,7 @@ public class LineToCubeSetsTest {
 
     @BeforeEach
     void setUp() {
-        sus = new LineToCubeSetsImpl();
+        sus = new LineToCubeSetsImpl(new LineToCubeSetImpl());
     }
 
     @Test

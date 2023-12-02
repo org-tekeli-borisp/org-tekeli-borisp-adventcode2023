@@ -4,7 +4,14 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -64,15 +71,36 @@ class GamesToSumTest {
 
     @Test
     void shouldProduceIntValueForExampleData() {
-        final var games = givenExampleData();
-        final var cubeBag = new CubeBag(12, 13,14);
+        final var games = givenExampleGames();
+        final var cubeBag = new CubeBag(12, 13, 14);
 
         final var product = sus.apply(games, cubeBag);
 
         assertThat(product).isEqualTo(8);
     }
 
-    private static List<Game> givenExampleData() {
+    @Test
+    void shouldProduce8WithExampleData() throws URISyntaxException, IOException {
+        final var games = givenGamesFromInputFile("example.txt");
+        final var cubeBag = new CubeBag(12, 13, 14);
+
+        final var product = sus.apply(games, cubeBag);
+
+        assertThat(product).isEqualTo(8);
+    }
+
+    @Test
+    void shouldProduce2447WithInputData() throws URISyntaxException, IOException {
+        final var games = givenGamesFromInputFile("input.txt");
+        final var cubeBag = new CubeBag(12, 13, 14);
+
+        final var product = sus.apply(games, cubeBag);
+
+        assertThat(product).isEqualTo(2447);
+    }
+
+
+    private static List<Game> givenExampleGames() {
         return List.of(
                 new Game(1, List.of(
                         new CubeSubset(4, 0, 3),
@@ -99,5 +127,20 @@ class GamesToSumTest {
                         new CubeSubset(1, 2, 2)
                 ))
         );
+    }
+
+    private List<Game> givenGamesFromInputFile(final String filename) throws URISyntaxException, IOException {
+        final var lineToGame = new LineToGameImpl(new LineToGameIdImpl(), new LineToCubeSetsImpl(new LineToCubeSetImpl()));
+
+        final var path = Paths
+                .get(Objects.requireNonNull(getClass().getClassLoader().getResource(filename))
+                        .toURI());
+        return Files
+                .readAllLines(path)
+                .stream()
+                .map(lineToGame::apply)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
     }
 }
