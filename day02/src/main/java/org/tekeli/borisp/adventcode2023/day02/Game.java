@@ -1,4 +1,6 @@
 package org.tekeli.borisp.adventcode2023.day02;
 
-public record Game(Integer id) {
+import java.util.List;
+
+public record Game(Integer id, List<CubeSubset> subsets) {
 }
