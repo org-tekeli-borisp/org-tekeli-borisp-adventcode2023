@@ -116,10 +116,6 @@ public class Calibration2Test {
 
     @Test
     void shouldProduce281InCaseOfExampleData2() {
-        sus = new Calibration2Impl(
-                new IsCalibrationDocumentValidImpl(),
-                new CalibrationDocumentLineToCalibrationValueImpl(),
-                new NumberInWordsToNumberAndWordImpl());
         final var calibrationDocument = givenCalibrationDocumentWithContent(exampleData2);
 
         final var product = sus.apply(calibrationDocument);
