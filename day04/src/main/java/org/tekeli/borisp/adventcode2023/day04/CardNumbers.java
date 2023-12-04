@@ -7,6 +7,10 @@ public record CardNumbers(List<Integer> winningNumbers, List<Integer> yourNumber
         return (long) Math.pow(2, winningMatchCount() -1);
     }
 
+    public long matches() {
+        return winningMatchCount();
+    }
+
     private long winningMatchCount() {
         return yourNumbers
                 .stream()
