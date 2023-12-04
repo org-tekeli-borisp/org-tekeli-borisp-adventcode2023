@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import static java.util.function.Predicate.not;
 
-public class LineToCardNumbersImpl implements LineToCardNumbers {
+class LineToCardNumbersImpl implements LineToCardNumbers {
 
 
     @Override
@@ -32,8 +32,8 @@ public class LineToCardNumbersImpl implements LineToCardNumbers {
         return Optional.of(new CardNumbers(winningNumbers,yourNumbers));
     }
 
-    private static List<Integer> getList(String[] cardNumbers, int x) {
-        return Arrays.stream(cardNumbers[x].split(" "))
+    private static List<Integer> getList(final String[] cardNumbers, final int position) {
+        return Arrays.stream(cardNumbers[position].split(" "))
                 .filter(not(String::isBlank))
                 .map(String::trim)
                 .map(Integer::valueOf)
