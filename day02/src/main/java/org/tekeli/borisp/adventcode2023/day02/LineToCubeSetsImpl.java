@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class LineToCubeSetsImpl implements LineToCubeSets {
+class LineToCubeSetsImpl implements LineToCubeSets {
 
     private final LineToCubeSet lineToCubeSet;
 
