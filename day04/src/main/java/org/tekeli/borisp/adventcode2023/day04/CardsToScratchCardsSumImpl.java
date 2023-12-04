@@ -2,7 +2,7 @@ package org.tekeli.borisp.adventcode2023.day04;
 
 import java.util.List;
 
-public class CardsToScratchCardsSumImpl implements CardsToScratchCardsSum {
+class CardsToScratchCardsSumImpl implements CardsToScratchCardsSum {
 
     @Override
     public long apply(final List<Card> cards) {
