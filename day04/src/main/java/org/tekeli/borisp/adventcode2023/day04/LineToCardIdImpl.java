@@ -9,7 +9,7 @@ class LineToCardIdImpl implements LineToCardId {
             final var gameIndexStart = line.indexOf("Card ");
             final var colonIndex = line.indexOf(":");
             final var substring = line.substring(gameIndexStart, colonIndex);
-            final var stringNumber = substring.replace("Card ", "");
+            final var stringNumber = substring.replace("Card ", "").trim();
             return Optional.of(Integer.valueOf(stringNumber));
         } catch (NullPointerException | StringIndexOutOfBoundsException | NumberFormatException exception) {
             return Optional.empty();
