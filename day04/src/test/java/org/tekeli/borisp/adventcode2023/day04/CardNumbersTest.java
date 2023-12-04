@@ -28,4 +28,14 @@ class CardNumbersTest {
         assertThat(sus.yourNumbers()).hasOnlyElementsOfType(Integer.class);
         assertThat(sus.yourNumbers()).isEqualTo(yourNumbers);
     }
+
+    @Test
+    void shouldProducePoints() {
+        final var winningNumbers = List.of(41, 48, 83, 86, 17);
+        final var yourNumbers = List.of(83, 86, 6, 31, 17, 9, 48, 53);
+
+        final var sus = new CardNumbers(winningNumbers, yourNumbers);
+
+        assertThat(sus.points()).isEqualTo(8);
+    }
 }
