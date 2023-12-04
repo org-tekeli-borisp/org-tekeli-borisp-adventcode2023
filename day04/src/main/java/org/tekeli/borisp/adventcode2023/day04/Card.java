@@ -4,4 +4,9 @@ public record Card(int id, CardNumbers cardNumbers) {
     public long points() {
         return cardNumbers.points();
     }
+
+
+    public long matches() {
+        return cardNumbers.matches();
+    }
 }

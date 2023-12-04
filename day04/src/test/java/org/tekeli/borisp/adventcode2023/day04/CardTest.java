@@ -23,4 +23,13 @@ class CardTest {
 
         assertThat(sus.points()).isEqualTo(8);
     }
+
+    @Test
+    void shouldHaveMatches() {
+        final var carsNumbers = new CardNumbers(List.of(41, 48, 83, 86, 17), List.of(83, 86, 6, 31, 17, 9, 48, 53));
+
+        final var sus = new Card(42, carsNumbers);
+
+        assertThat(sus.matches()).isEqualTo(4);
+    }
 }
