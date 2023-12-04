@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public interface CardsFromInputFileLoader {
+interface CardsFromInputFileLoader {
     default List<Card> givenCardsFromInputFile(String filename) throws URISyntaxException, IOException {
         final var path = Paths
                 .get(Objects.requireNonNull(getClass().getClassLoader().getResource(filename))

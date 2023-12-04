@@ -8,7 +8,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
-public class LineToCardIdTest {
+class LineToCardIdTest {
 
     private LineToCardId sus;
 
