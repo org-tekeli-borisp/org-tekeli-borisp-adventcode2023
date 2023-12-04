@@ -10,30 +10,18 @@ class CardTest {
     @Test
     void shouldHaveId() {
 
-        final var sus = new Card(42, List.of(), List.of());
+        final var sus = new Card(42, null);
 
         assertThat(sus.id()).isEqualTo(42);
     }
 
     @Test
-    void shouldHaveWinningNumbers() {
-        final var winningNumbers = List.of(1,2,3);
+    void shouldHaveCardNumbers() {
+        final var carsNumbers = new CardNumbers(List.of(1,2,3), List.of(1,4,6,7));
 
-        final var sus = new Card(42, winningNumbers, List.of());
+        final var sus = new Card(42, carsNumbers);
 
-        assertThat(sus.winningNumbers()).isInstanceOf(List.class);
-        assertThat(sus.winningNumbers()).hasOnlyElementsOfType(Integer.class);
-        assertThat(sus.winningNumbers()).isEqualTo(winningNumbers);
-    }
-
-    @Test
-    void shouldHaveNumbers() {
-        final var numbers = List.of(1,4,6,7);
-
-        final var sus = new Card(42,  List.of(), numbers);
-
-        assertThat(sus.numbers()).isInstanceOf(List.class);
-        assertThat(sus.numbers()).hasOnlyElementsOfType(Integer.class);
-        assertThat(sus.numbers()).isEqualTo(numbers);
+        assertThat(sus.cardNumbers()).isInstanceOf(CardNumbers.class);
+        assertThat(sus.cardNumbers()).isEqualTo(carsNumbers);
     }
 }
